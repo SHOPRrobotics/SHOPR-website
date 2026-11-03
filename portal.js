@@ -27,10 +27,10 @@
   const DECOR = [{ x: 530, y: 494, w: 190, h: 45, label: "HOT FOOD" }];
 
   const ACTION_COLORS = {
-    picking: "#e0a14a",
-    moving: "#6b9fd4",
-    charging: "#3dbe8c",
-    stocking: "#c084e0",
+    picking: "#b45309",
+    moving: "#00006c",
+    charging: "#0f766e",
+    stocking: "#6d28d9",
   };
 
   const ACTION_LABELS = {
@@ -435,26 +435,26 @@
     const soupPoint = slotApproach(soup);
     return [
       {
-        id: "r1", name: "SHOPR-01", color: "#7eb0e0",
+        id: "r1", name: "SHOPR-01", color: "#00006c",
         x: NODES.entrance.x, y: NODES.entrance.y, heading: -Math.PI / 2,
         battery: 86, speed: 108, busy: null, phase: null,
         path: buildPath("entrance", "slot-cookies", NODES.entrance.x, NODES.entrance.y),
         dwell: 0, cartId: null, focusId: null, manual: false,
       },
       {
-        id: "r2", name: "SHOPR-02", color: "#e0a14a",
+        id: "r2", name: "SHOPR-02", color: "#b45309",
         x: chipPoint.x, y: chipPoint.y, heading: -Math.PI / 2,
         battery: 73, speed: 102, busy: "picking", phase: "ambient", path: [],
         dwell: 8, cartId: null, focusId: "chips", manual: false,
       },
       {
-        id: "r3", name: "SHOPR-03", color: "#5dcaa0",
+        id: "r3", name: "SHOPR-03", color: "#0f766e",
         x: soupPoint.x, y: soupPoint.y, heading: Math.PI / 2,
         battery: 64, speed: 98, busy: "stocking", phase: "stock", path: [],
         dwell: 9, cartId: null, focusId: "soup", manual: false,
       },
       {
-        id: "r4", name: "SHOPR-04", color: "#e08ab0",
+        id: "r4", name: "SHOPR-04", color: "#9d174d",
         x: NODES.dock.x, y: NODES.dock.y, heading: Math.PI,
         battery: 24, speed: 100, busy: "charging", phase: "charging", path: [],
         dwell: 0, cartId: null, focusId: null, manual: false,
@@ -477,11 +477,11 @@
     const base = ns("rect");
     base.setAttribute("width", "28");
     base.setAttribute("height", "28");
-    base.setAttribute("fill", "#15202c");
+    base.setAttribute("fill", "#ffffff");
     const gridLine = ns("path");
     gridLine.setAttribute("d", "M 28 0 L 0 0 0 28");
     gridLine.setAttribute("fill", "none");
-    gridLine.setAttribute("stroke", "rgba(143,163,188,0.13)");
+    gridLine.setAttribute("stroke", "#e8e8e3");
     gridLine.setAttribute("stroke-width", "1");
     pattern.append(base, gridLine);
     defs.append(pattern);
@@ -490,14 +490,14 @@
     const points = WALL.map((pair) => pair.join(",")).join(" ");
     const curb = ns("polygon");
     curb.setAttribute("points", points);
-    curb.setAttribute("fill", "#15202c");
-    curb.setAttribute("stroke", "#0c1218");
+    curb.setAttribute("fill", "#f4f4f0");
+    curb.setAttribute("stroke", "#f4f4f0");
     curb.setAttribute("stroke-width", "26");
     curb.setAttribute("stroke-linejoin", "miter");
     const floor = ns("polygon");
     floor.setAttribute("points", points);
     floor.setAttribute("fill", "url(#floor-grid)");
-    floor.setAttribute("stroke", "#8fb4dc");
+    floor.setAttribute("stroke", "#101014");
     floor.setAttribute("stroke-width", "4");
     floor.setAttribute("stroke-linejoin", "miter");
     floorSvg.append(curb, floor);
@@ -509,7 +509,7 @@
     door.setAttribute("y1", doorA[1]);
     door.setAttribute("x2", doorB[0]);
     door.setAttribute("y2", doorB[1]);
-    door.setAttribute("stroke", "#15202c");
+    door.setAttribute("stroke", "#f4f4f0");
     door.setAttribute("stroke-width", "8");
     door.setAttribute("stroke-linecap", "butt");
     floorSvg.append(door);
@@ -524,8 +524,8 @@
       rect.setAttribute("width", counter.w);
       rect.setAttribute("height", counter.h);
       rect.setAttribute("rx", "5");
-      rect.setAttribute("fill", "#1b2c3d");
-      rect.setAttribute("stroke", "#3d5a7a");
+      rect.setAttribute("fill", "#ffffff");
+      rect.setAttribute("stroke", "#c6c7c1");
       floorSvg.append(rect);
     });
     addLabel("CHECKOUT", COUNTERS[1].x + COUNTERS[1].w / 2, COUNTERS[1].y + 26, true);
@@ -538,8 +538,8 @@
       rect.setAttribute("width", fixture.w);
       rect.setAttribute("height", fixture.h);
       rect.setAttribute("rx", "5");
-      rect.setAttribute("fill", "#1a2836");
-      rect.setAttribute("stroke", "#31485f");
+      rect.setAttribute("fill", "#ffffff");
+      rect.setAttribute("stroke", "#c6c7c1");
       floorSvg.append(rect);
       addLabel(fixture.label, fixture.x + fixture.w / 2, fixture.y - 8, true);
     });
@@ -550,8 +550,8 @@
     pad.setAttribute("width", CHARGE_PAD.w);
     pad.setAttribute("height", CHARGE_PAD.h);
     pad.setAttribute("rx", "8");
-    pad.setAttribute("fill", "#123028");
-    pad.setAttribute("stroke", "#3dbe8c");
+    pad.setAttribute("fill", "#eceefc");
+    pad.setAttribute("stroke", "#00006c");
     floorSvg.append(pad);
     addLabel("STOCK ROOM", 930, 170, true);
 
@@ -566,7 +566,7 @@
         line.setAttribute("y1", NODES[from].y);
         line.setAttribute("x2", NODES[to].x);
         line.setAttribute("y2", NODES[to].y);
-        line.setAttribute("stroke", "rgba(143,163,188,0.08)");
+        line.setAttribute("stroke", "rgba(16,16,20,0.06)");
         line.setAttribute("stroke-width", "10");
         line.setAttribute("stroke-linecap", "round");
         floorSvg.append(line);
@@ -599,11 +599,11 @@
       body.setAttribute("fill", robot.color);
       const heading = ns("line");
       heading.setAttribute("class", "robot-heading");
-      heading.setAttribute("x1", "0");
+      heading.setAttribute("x1", "14");
       heading.setAttribute("y1", "0");
-      heading.setAttribute("x2", "18");
+      heading.setAttribute("x2", "22");
       heading.setAttribute("y2", "0");
-      heading.setAttribute("stroke", "#f4f7fb");
+      heading.setAttribute("stroke", "#101014");
       heading.setAttribute("stroke-width", "2");
       heading.setAttribute("stroke-linecap", "round");
       const num = ns("text");
@@ -643,7 +643,7 @@
     line.setAttribute("y1", y1);
     line.setAttribute("x2", x2);
     line.setAttribute("y2", y2);
-    line.setAttribute("stroke", "#8fb4dc");
+    line.setAttribute("stroke", "#101014");
     line.setAttribute("stroke-width", "4");
     line.setAttribute("stroke-linecap", "round");
     floorSvg.append(line);
@@ -666,8 +666,8 @@
     rect.setAttribute("width", shelf.w);
     rect.setAttribute("height", shelf.h);
     rect.setAttribute("rx", "6");
-    rect.setAttribute("fill", "#1a2836");
-    rect.setAttribute("stroke", "#31485f");
+    rect.setAttribute("fill", "#ffffff");
+    rect.setAttribute("stroke", "#c6c7c1");
     floorSvg.append(rect);
     const label = ns("text");
     label.setAttribute("class", "zone-label");
@@ -742,7 +742,7 @@
       pip.setAttribute("class", "pip pip--" + tone);
       const count = group.querySelector(".pip-count");
       count.textContent = String(slot.stock);
-      count.setAttribute("fill", tone === "critical" ? "#fff" : "#102018");
+      count.setAttribute("fill", "#fff");
       group.classList.toggle("is-hot", hot.has(slot.id));
     });
   }
